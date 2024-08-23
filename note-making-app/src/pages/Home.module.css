@@ -1,0 +1,81 @@
+:root{
+    --theme-color: white;
+    --secondary-color: #16008B;
+    --c1 :  #B38BFA;
+    --c2: #FF79F2;
+    --c3: #43E6FC;
+    --c4: #F19576;
+    --c5: #0047FF;
+    --c6: #6691FF;
+    --c7: #001F8B;
+
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+
+}
+
+.right {
+    width: 75%;
+    height: 100%;
+    padding: 50px;
+    background-color: #DAE5F5;
+    
+}
+ 
+img{
+    height: 35vh;
+    width: 35vw;
+
+
+}
+.rightCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    gap: 15px;
+}
+.title{
+    font-weight: 600;
+    font-size: 1.5em;
+    margin: 2em 4em;
+}
+
+.desc{
+  max-width: 45%;
+}
+.enc{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5em;
+}
+.plusContainer{
+    border: 1px solid var(--secondary-color);
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    height: 6vh;
+    width: 3vw;
+    color: var(--theme-color);
+    font-size: 2.5em;
+    position: fixed;
+    bottom: 1em;
+    left: 8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
