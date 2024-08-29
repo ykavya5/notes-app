@@ -15,7 +15,7 @@ function Home() {
     const [messages, setMessages] = useState([]);
     const [messageInput, setMessageInput] = useState('');
 
-    // Load groups and notes from localStorage when the component mounts
+    
     useEffect(() => {
         const savedGroups = JSON.parse(localStorage.getItem('groups')) || [];
         setGroups(savedGroups);
@@ -48,22 +48,22 @@ function Home() {
     const handleFormSubmit = (e) => {
         e.preventDefault();
         if (groupName.trim() && selectedColor) {
-            // Split the groupName into words and filter out empty strings
+            
             const words = groupName.split(' ').filter(word => word);
     
             let initials = '';
     
-            // If there are more than 2 words, get the first letter of the first and last words
+           
             if (words.length > 2) {
                 initials = words[0][0].toUpperCase() + words[words.length - 1][0].toUpperCase();
             } else {
-                // Otherwise, get the first letter of each word
+               
                 initials = words.map(word => word[0].toUpperCase()).join('');
             }
     
             const newGroup = { name: groupName, color: selectedColor, initials };
     
-            // Save the group to the state and localStorage
+          
             const updatedGroups = [...groups, newGroup];
             setGroups(updatedGroups);
             localStorage.setItem('groups', JSON.stringify(updatedGroups));
@@ -78,7 +78,7 @@ function Home() {
     const handleGroupClick = (group) => {
         setSelectedGroup(group);
 
-        // Fetch messages related to the selected group from localStorage
+        
         const groupMessages = JSON.parse(localStorage.getItem(group.name)) || [];
         setMessages(groupMessages);
     };
@@ -91,22 +91,22 @@ function Home() {
             const formattedTime = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: true }).replace('am', 'AM').replace('pm', 'PM');
             const newMessage = {
                 text: messageInput,
-                dateTime: { date: formattedDate, time: formattedTime } // Store date and time separately
+                dateTime: { date: formattedDate, time: formattedTime } 
             };
 
-            // Save the new message to the state and localStorage
+           
             const updatedMessages = [...messages, newMessage];
             setMessages(updatedMessages);
             localStorage.setItem(selectedGroup.name, JSON.stringify(updatedMessages));
 
-            setMessageInput(''); // Clear the input field
+            setMessageInput(''); 
         }
     };
 
     const handleKeyDown = (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) { // Check if Enter key is pressed without Shift key
-            e.preventDefault(); // Prevent new line from being added
-            handleSendMessage(e); // Call the send message function
+        if (e.key === 'Enter' && !e.shiftKey) { 
+            e.preventDefault(); 
+            handleSendMessage(e); 
         }
     };
 
@@ -163,7 +163,7 @@ function Home() {
                                     onChange={(e) => setMessageInput(e.target.value)}
                                     placeholder="Enter your text here..........."
                                     className={styles.messageInput}
-                                    rows="5" // Set the number of visible text lines
+                                    rows="5" 
                                     onKeyDown={handleKeyDown}
                                     required
                                 />
