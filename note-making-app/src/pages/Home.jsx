@@ -4,6 +4,8 @@ import img1 from '../assets/image-1.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import SendIcon from '@mui/icons-material/Send';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 
 function Home() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -14,7 +16,7 @@ function Home() {
     const [selectedGroup, setSelectedGroup] = useState(null);
     const [messages, setMessages] = useState([]);
     const [messageInput, setMessageInput] = useState('');
-
+    const [isFullWidth, setIsFullWidth] = useState(false);
     
     useEffect(() => {
         const savedGroups = JSON.parse(localStorage.getItem('groups')) || [];
@@ -32,9 +34,16 @@ function Home() {
                 setIsPopupOpen(false);
             }
         }
+        const handleResize = () => {
+            if (window.innerWidth > 768) {
+                setIsFullWidth(false);
+            }
+        };
 
+        window.addEventListener('resize', handleResize);
         document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
+        return () =>{ document.removeEventListener('mousedown', handleClickOutside);
+            window.removeEventListener('resize', handleResize);}
     }, []);
 
     const handleColorClick = (color) => {
@@ -76,11 +85,15 @@ function Home() {
     
 
     const handleGroupClick = (group) => {
+        setIsFullWidth(true);
         setSelectedGroup(group);
 
         
         const groupMessages = JSON.parse(localStorage.getItem(group.name)) || [];
         setMessages(groupMessages);
+    };
+    const handleBackClick = () => {
+        setIsFullWidth(false);
     };
 
     const handleSendMessage = (e) => {
@@ -113,7 +126,9 @@ function Home() {
     return (
         <div>
             <div className={styles.container}>
-                <div className={styles.left}>
+            <div
+                className={`${styles.left} ${isFullWidth ? styles.hidden : styles.show}`}
+            >
                     <div className={styles.title}>Pocket Notes</div>
                     <div className={styles.groupList}>
                         {groups.map((group, index) => (
@@ -133,10 +148,18 @@ function Home() {
                     </div>
                 </div>
 
-                <div className={styles.right}>
+                <div
+                className={`${styles.right} ${isFullWidth ? styles.show : styles.hidden}`}
+            >
                     {selectedGroup ? (
                         <div className={styles.chatContainer}>
                             <div className={styles.chatHeader}>
+                            {isFullWidth && (
+                                    <ArrowBackIcon
+                                        className={styles.backIcon}
+                                        onClick={handleBackClick}
+                                    />
+                                )}
                                 <div
                                     className={styles.chatGroupIcon}
                                     style={{ backgroundColor: `var(--${selectedGroup.color})` }}
@@ -173,7 +196,7 @@ function Home() {
                             </form>
                         </div>
                     ) : (
-                        <div>
+                        <div className={styles.smallRight}>
                             <div className={styles.rightCont}>
                                 <img src={img1} alt="Notes-Image" />
                                 <h1 className={styles.heading}>Pocket Notes</h1>

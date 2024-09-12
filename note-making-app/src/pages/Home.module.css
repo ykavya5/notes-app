@@ -10,6 +10,11 @@
     --c7: #001F8B;
 
 }
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
 
 .container {
     height: 100vh;
@@ -210,7 +215,7 @@ img{
     display: flex;
     align-items: center;
     gap: 1.3em;
-    padding: 1em;
+    padding: 1em 1em 1em 3em;
     height: 10vh;
     background-color: var(--c7);
     color: white;
@@ -313,36 +318,50 @@ img{
     margin-bottom: 0.4em;
   
 }
+
 @media (min-width:320px) and (max-width: 426px) {
     .container {
-        display: flex;
-        flex-direction: column;
+        display: block;
     }
 
-    .left {
-        width: 100%;
-      }
     
-      .right {
+      .left.show{
+        display:block;
+        width:100%;
+      }
+
+      .left.hidden{
+        display:none;
+        width:0%;
+       
+    }
+    .right.show{
+        display: block;
         width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        transform: translateX(100%);
-      }
+        max-width: 100%;
+    }
+    .right.hidden{
+        display: none;
+        width:0%;
+    }
+   
     
-      .rightContainer.show {
-        transform: translateX(0);
-      }
+    .smallRight{
+        display: none;
+    }
+    .chatContainer{
+        width:100%;
+    }
     
       .backIcon {
         display: block;
         position: absolute;
-        top: 10px;
+        top: 1.7em;
         left: 10px;
         z-index: 1;
+        
       }
+    
     .plusContainer{
         height: 8vh;
         width:8vw;
@@ -350,7 +369,7 @@ img{
     .popup{
         height: 40vh;
         width:90vw;
-        left:33vh;
+        left: 50%;
         
     }
     .grpName{
@@ -359,8 +378,15 @@ img{
     }
     .create{
         height:4vh;
-        width:15vw;
+        width:50vw;
+        float: none;
+        text-align: center;
+       margin-left: 15%;
     }
+    form{
+        margin-top: 2em;
+    }
+ 
     
 }
 @media(min-width:426px) and (max-width:768px){
@@ -428,7 +454,7 @@ img{
 
 }
 
-@media(min-width:1025px) and (max-width: 1440px){
+@media(min-width:1025px) and (max-width:1440px) {
      .plusContainer{
         left: 5.4em;
      }
@@ -461,7 +487,7 @@ img{
     }
      
 }
-@media (min-width: 1441px) and (max-width: 2560px) {
+ /* @media (min-width: 1441px) and (max-width: 2560px) {
     .plusContainer{
        left: 4.5em;
        font-size: 6em;
@@ -469,11 +495,11 @@ img{
        width: 1.5em;
     }
     .rightCont{
-       padding-top: 17em;
+       padding-top: 15.5em;
        font-size: 2em;
     }
     .enc{
-       padding-top:4.7em;
+       
        font-size: 2em;
     }
     .desc{
@@ -533,4 +559,4 @@ img{
     .create{
         font-size: 1em;
     }
-}
+}  */
